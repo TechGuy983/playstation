@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayStation History - Complete Evolution</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="clean-nav.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .history-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .history-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+        
+        .history-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            color: #00ff00;
+            text-shadow: 0 0 30px #00ff00;
+            margin-bottom: 1rem;
+        }
+        
+        .console-timeline {
+            position: relative;
+            margin: 4rem 0;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #00ff00, var(--ps-accent), var(--ps-gold));
+            transform: translateX(-50%);
+        }
+        
+        .console-era {
+            margin-bottom: 6rem;
+            position: relative;
+        }
+        
+        .console-card {
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            position: relative;
+            width: 45%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .console-card.left {
+            margin-right: auto;
+        }
+        
+        .console-card.right {
+            margin-left: auto;
+        }
+        
+        .console-year {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #00ff00;
+            color: var(--ps-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            z-index: 10;
+        }
+        
+        .console-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            color: var(--ps-accent);
+            margin-bottom: 1rem;
+        }
+        
+        .console-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .spec-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .spec-label {
+            font-weight: bold;
+            color: var(--ps-gold);
+            font-size: 0.9rem;
+        }
+        
+        .spec-value {
+            color: var(--ps-white);
+            margin-top: 0.5rem;
+        }
+        
+        .console-achievements {
+            margin-top: 1.5rem;
+        }
+        
+        .achievement-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .achievement-list li {
+            padding: 0.5rem 0;
+            border-left: 3px solid var(--ps-accent);
+            padding-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+            
+            .console-card {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+            
+            .console-year {
+                left: 20px;
+                transform: translateY(-50%);
+            }
+            
+            .history-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo clickable-logo">
+                <div class="ps-logo-container">
+                    <span class="ps-logo typing">PlayStation</span>
+                    <div class="ps-symbols">
+                        <div class="ps-symbol triangle">▲</div>
+                        <div class="ps-symbol square">■</div>
+                        <div class="ps-symbol circle">●</div>
+                        <div class="ps-symbol x">✕</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu nav-hidden">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="games.html" class="nav-link">Games</a></li>
+                <li><a href="exclusives.html" class="nav-link">Exclusives</a></li>
+                <li><a href="community.html" class="nav-link">Community</a></li>
+            </ul>
+        </div>
+        <div class="nav-overlay"></div>
+    </nav>
+
+    <main style="margin-top: 100px;">
+        <div class="history-container">
+            <div class="history-hero">
+                <h1 class="history-title">PlayStation History</h1>
+                <p style="font-size: 1.3rem; opacity: 0.9;">The Complete Evolution of Gaming's Most Iconic Brand</p>
+                <p style="font-size: 1rem; opacity: 0.8; margin-top: 1rem;">From 1994 to 2026 - Over 30 Years of Innovation</p>
+            </div>
+
+            <div class="console-timeline">
+                <div class="timeline-line"></div>
+
+                <div class="console-era">
+                    <div class="console-card left">
+                        <div class="console-image-container" style="text-align: center; margin-bottom: 1.5rem;">
+                            <img src="jonathan-cooper-dX_Y7f9T2G4-unsplash.jpg" alt="PlayStation 1 Console" style="max-width: 300px; width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 2px solid rgba(0, 255, 0, 0.3);">
+                        </div>
+                        <h2 class="console-name">PlayStation (PSX)</h2>
+                        <p>The console that started it all. Sony's bold entry into gaming changed everything.</p>
+                        <div class="console-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">CPU</div>
+                                <div class="spec-value">32-bit R3000A RISC</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Memory</div>
+                                <div class="spec-value">2MB RAM, 1MB VRAM</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Storage</div>
+                                <div class="spec-value">CD-ROM</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Units Sold</div>
+                                <div class="spec-value">102.49 million</div>
+                            </div>
+                        </div>
+                        <div class="console-achievements">
+                            <h4 style="color: var(--ps-gold);">Key Achievements:</h4>
+                            <ul class="achievement-list">
+                                <li>First console to sell 100+ million units</li>
+                                <li>Introduced CD-ROM gaming to mainstream</li>
+                                <li>Launched iconic franchises: Final Fantasy VII, Metal Gear Solid</li>
+                                <li>Revolutionized 3D gaming</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="console-year">1994</div>
+                </div>
+
+                <div class="console-era">
+                    <div class="console-card right">
+                        <div class="console-image-container" style="text-align: center; margin-bottom: 1.5rem;">
+                            <img src="nikita-kostrykin-5eLQ_NB-E8A-unsplash.jpg" alt="PlayStation 2 Console" style="max-width: 300px; width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 2px solid rgba(0, 255, 0, 0.3);">
+                        </div>
+                        <h2 class="console-name">PlayStation 2</h2>
+                        <p>The best-selling video game console of all time. DVD playback made it a multimedia powerhouse.</p>
+                        <div class="console-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">CPU</div>
+                                <div class="spec-value">128-bit Emotion Engine</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Memory</div>
+                                <div class="spec-value">32MB RAM, 4MB VRAM</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Storage</div>
+                                <div class="spec-value">DVD-ROM</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Units Sold</div>
+                                <div class="spec-value">155+ million</div>
+                            </div>
+                        </div>
+                        <div class="console-achievements">
+                            <h4 style="color: var(--ps-gold);">Key Achievements:</h4>
+                            <ul class="achievement-list">
+                                <li>Best-selling console in history</li>
+                                <li>Backward compatibility with PS1</li>
+                                <li>DVD movie playback capability</li>
+                                <li>Launched Grand Theft Auto series, God of War</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="console-year">2000</div>
+                </div>
+
+                <div class="console-era">
+                    <div class="console-card left">
+                        <div class="console-image-container" style="text-align: center; margin-bottom: 1.5rem;">
+                            <img src="nestor-mehanikov-rW2xrksOzUQ-unsplash.jpg" alt="PlayStation 3 Console" style="max-width: 300px; width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 2px solid rgba(0, 255, 0, 0.3);">
+                        </div>
+                        <h2 class="console-name">PlayStation 3</h2>
+                        <p>The HD gaming revolution. Blu-ray technology and the powerful Cell processor defined next-gen.</p>
+                        <div class="console-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">CPU</div>
+                                <div class="spec-value">Cell Broadband Engine</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Memory</div>
+                                <div class="spec-value">256MB XDR RAM</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Storage</div>
+                                <div class="spec-value">Blu-ray Disc</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Units Sold</div>
+                                <div class="spec-value">87.4 million</div>
+                            </div>
+                        </div>
+                        <div class="console-achievements">
+                            <h4 style="color: var(--ps-gold);">Key Achievements:</h4>
+                            <ul class="achievement-list">
+                                <li>First console with Blu-ray technology</li>
+                                <li>Introduced PlayStation Network (PSN)</li>
+                                <li>HD gaming at 1080p resolution</li>
+                                <li>Launched The Last of Us, Uncharted series</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="console-year">2006</div>
+                </div>
+
+                <div class="console-era">
+                    <div class="console-card right">
+                        <div class="console-image-container" style="text-align: center; margin-bottom: 1.5rem;">
+                            <img src="anthony-RLVi1TD5bM4-unsplash.jpg" alt="PlayStation 4 Console" style="max-width: 300px; width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 2px solid rgba(0, 255, 0, 0.3);">
+                        </div>
+                        <h2 class="console-name">PlayStation 4</h2>
+                        <p>Social gaming redefined. Share button, streaming, and incredible exclusive games.</p>
+                        <div class="console-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">CPU</div>
+                                <div class="spec-value">8-core AMD Jaguar</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Memory</div>
+                                <div class="spec-value">8GB GDDR5 RAM</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Storage</div>
+                                <div class="spec-value">500GB/1TB HDD</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Units Sold</div>
+                                <div class="spec-value">117+ million</div>
+                            </div>
+                        </div>
+                        <div class="console-achievements">
+                            <h4 style="color: var(--ps-gold);">Key Achievements:</h4>
+                            <ul class="achievement-list">
+                                <li>Fastest-selling PlayStation console</li>
+                                <li>Introduced Share button for social gaming</li>
+                                <li>PlayStation VR compatibility</li>
+                                <li>Masterpieces: God of War (2018), Spider-Man, Horizon Zero Dawn</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="console-year">2013</div>
+                </div>
+
+                <div class="console-era">
+                    <div class="console-card left">
+                        <div class="console-image-container" style="text-align: center; margin-bottom: 1.5rem;">
+                            <img src="mahdi-naserinejad-TlzsP6OLNYo-unsplash.jpg" alt="PlayStation 5 Console" style="max-width: 300px; width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 2px solid rgba(0, 255, 0, 0.3);">
+                        </div>
+                        <h2 class="console-name">PlayStation 5</h2>
+                        <p>Next-gen gaming perfected. Lightning-fast SSD, ray tracing, and revolutionary DualSense controller.</p>
+                        <div class="console-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">CPU</div>
+                                <div class="spec-value">8-core AMD Zen 2</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Memory</div>
+                                <div class="spec-value">16GB GDDR6 RAM</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Storage</div>
+                                <div class="spec-value">825GB Custom SSD</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Units Sold</div>
+                                <div class="spec-value">50+ million</div>
+                            </div>
+                        </div>
+                        <div class="console-achievements">
+                            <h4 style="color: var(--ps-gold);">Key Achievements:</h4>
+                            <ul class="achievement-list">
+                                <li>Revolutionary DualSense haptic feedback</li>
+                                <li>Ultra-fast SSD eliminates loading screens</li>
+                                <li>Hardware-accelerated ray tracing</li>
+                                <li>4K gaming at 120fps capability</li>
+                                <li>3D Audio with Tempest 3D AudioTech</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="console-year">2020</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(0, 0, 0, 0.8); padding: 3rem; border-radius: 20px; border: 1px solid rgba(0, 255, 0, 0.3); text-align: center; margin-top: 4rem;">
+                <h2 style="font-family: 'Orbitron', monospace; color: #00ff00; margin-bottom: 2rem;">PlayStation Legacy</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--ps-accent);">500M+</div>
+                        <div>Consoles Sold Worldwide</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--ps-accent);">30+</div>
+                        <div>Years of Innovation</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--ps-accent);">5000+</div>
+                        <div>Games Released</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--ps-accent);">100M+</div>
+                        <div>Active Users</div>
+                    </div>
+                </div>
+                <p style="font-size: 1.2rem; opacity: 0.9;">From the original PlayStation to PS5, Sony has consistently pushed the boundaries of gaming technology, creating unforgettable experiences and defining entire generations of gamers.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 PlayStation Universe by Nathan Oladele. Experience the power of play.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="clean-nav.js"></script>
+</body>
+</html>

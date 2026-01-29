@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PlayStation Universe Favicon Generator</title>
+    <style>
+        body { 
+            background: #0a0a0a; 
+            color: white; 
+            font-family: Arial, sans-serif; 
+            padding: 20px;
+        }
+        .favicon-preview {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .size-label {
+            color: #00d4ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>PlayStation Universe Favicon</h1>
+    
+    <div class="favicon-preview">
+        <span class="size-label">16x16:</span>
+        <canvas id="favicon16" width="16" height="16"></canvas>
+    </div>
+    
+    <div class="favicon-preview">
+        <span class="size-label">32x32:</span>
+        <canvas id="favicon32" width="32" height="32"></canvas>
+    </div>
+    
+    <div class="favicon-preview">
+        <span class="size-label">48x48:</span>
+        <canvas id="favicon48" width="48" height="48"></canvas>
+    </div>
+
+    <script>
+        function drawFavicon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            const center = size / 2;
+            const radius = size / 2 - 1;
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#003087');
+            gradient.addColorStop(0.5, '#0070f3');
+            gradient.addColorStop(1, '#00d4ff');
+            
+            // Draw background circle
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(center, center, radius, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Draw border
+            ctx.strokeStyle = '#00d4ff';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            
+            // PlayStation symbols
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = size > 32 ? 2 : 1;
+            
+            const symbolSize = size * 0.15;
+            const offset = size * 0.25;
+            
+            // Triangle (top)
+            ctx.beginPath();
+            ctx.moveTo(center, center - offset);
+            ctx.lineTo(center - symbolSize, center - offset + symbolSize * 1.5);
+            ctx.lineTo(center + symbolSize, center - offset + symbolSize * 1.5);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Square (left)
+            ctx.fillRect(center - offset - symbolSize/2, center - symbolSize/2, symbolSize, symbolSize);
+            
+            // Circle (right)
+            ctx.beginPath();
+            ctx.arc(center + offset, center, symbolSize/2, 0, 2 * Math.PI);
+            ctx.stroke();
+            
+            // X (bottom)
+            ctx.beginPath();
+            ctx.moveTo(center - symbolSize/2, center + offset - symbolSize/2);
+            ctx.lineTo(center + symbolSize/2, center + offset + symbolSize/2);
+            ctx.moveTo(center + symbolSize/2, center + offset - symbolSize/2);
+            ctx.lineTo(center - symbolSize/2, center + offset + symbolSize/2);
+            ctx.stroke();
+            
+            // Center glow
+            const glowGradient = ctx.createRadialGradient(center, center, 0, center, center, size * 0.2);
+            glowGradient.addColorStop(0, 'rgba(0,212,255,0.6)');
+            glowGradient.addColorStop(1, 'rgba(0,212,255,0)');
+            ctx.fillStyle = glowGradient;
+            ctx.beginPath();
+            ctx.arc(center, center, size * 0.2, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+        
+        // Generate favicons
+        drawFavicon(document.getElementById('favicon16'), 16);
+        drawFavicon(document.getElementById('favicon32'), 32);
+        drawFavicon(document.getElementById('favicon48'), 48);
+        
+        // Function to download canvas as ICO (you'd need to implement ICO conversion)
+        function downloadFavicon(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        console.log('Favicons generated! You can right-click on each canvas to save as image.');
+    </script>
+    
+    <p style="color: #00d4ff; margin-top: 30px;">
+        Right-click on each canvas above to save the favicon in different sizes.<br>
+        The design features the iconic PlayStation symbols (Triangle, Square, Circle, X) arranged in a cross pattern<br>
+        with your site's signature blue gradient background and glowing effects.
+    </p>
+</body>
+</html>

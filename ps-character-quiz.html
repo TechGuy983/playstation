@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayStation Character Challenge</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="clean-nav.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .character-quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .character-quiz-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .character-image {
+            max-width: 400px;
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            display: block;
+            margin: 0 auto 2rem;
+        }
+        
+        .character-question {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--ps-white);
+            text-align: center;
+        }
+        
+        .character-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 15px;
+            color: var(--ps-white);
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 0 auto 1rem;
+            display: block;
+        }
+        
+        .character-input:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+        
+        .submit-guess-btn {
+            background: linear-gradient(45deg, #00ff00, #00cc00);
+            color: var(--ps-dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto 2rem;
+        }
+        
+        .submit-guess-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 255, 0, 0.5);
+        }
+        
+        .feedback-message {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            min-height: 30px;
+        }
+        
+        .feedback-correct { 
+            color: #00ff00; 
+            text-shadow: 0 0 10px #00ff00;
+        }
+        
+        .feedback-incorrect { 
+            color: #ff4444; 
+            text-shadow: 0 0 10px #ff4444;
+        }
+        
+        .character-results {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .unlock-animation {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: unlockBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes unlockBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(0deg); }
+            40% { transform: translateY(-15px) rotate(10deg); }
+            60% { transform: translateY(-8px) rotate(-5deg); }
+        }
+        
+        .results-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 1rem;
+        }
+        
+        .history-btn {
+            background: linear-gradient(45deg, #00ff00, #00cc00);
+            color: var(--ps-dark);
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .history-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 255, 0, 0.4);
+        }
+        
+        .retry-btn {
+            background: transparent;
+            color: var(--ps-accent);
+            border: 2px solid var(--ps-accent);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        
+        .retry-btn:hover {
+            background: var(--ps-accent);
+            color: var(--ps-dark);
+            transform: translateY(-3px);
+        }
+        
+        .fail-message .results-title {
+            color: #ff4444;
+            text-shadow: 0 0 20px #ff4444;
+        }
+        
+        @media (max-width: 768px) {
+            .character-image {
+                height: 250px;
+            }
+            
+            .character-quiz-title {
+                font-size: 2rem;
+            }
+            
+            .character-input {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo clickable-logo">
+                <div class="ps-logo-container">
+                    <span class="ps-logo typing">PlayStation</span>
+                    <div class="ps-symbols">
+                        <div class="ps-symbol triangle">▲</div>
+                        <div class="ps-symbol square">■</div>
+                        <div class="ps-symbol circle">●</div>
+                        <div class="ps-symbol x">✕</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu nav-hidden">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="games.html" class="nav-link">Games</a></li>
+                <li><a href="exclusives.html" class="nav-link">Exclusives</a></li>
+                <li><a href="community.html" class="nav-link">Community</a></li>
+            </ul>
+        </div>
+        <div class="nav-overlay"></div>
+    </nav>
+
+    <main style="margin-top: 120px; padding: 2rem 0;">
+        <div class="container">
+            <div class="character-quiz-container">
+                <h1 class="character-quiz-title">PlayStation Character Challenge</h1>
+                <p style="text-align: center; margin-bottom: 2rem; opacity: 0.9;">Identify these legendary PlayStation characters! Get 2 out of 3 correct to unlock PlayStation history.</p>
+                <div id="attemptsCounter" style="text-align: center; color: var(--ps-gold); font-weight: bold; margin-bottom: 2rem;">Question 1 of 3</div>
+
+                <div id="characterQuizContent">
+                    <img id="characterImage" class="character-image" src="kratos-ghost-of-3840x2160-16038.jpg" alt="PlayStation Character">
+                    <div class="character-question" id="characterQuestion">Who is this legendary Spartan warrior turned Norse god slayer?</div>
+                    <input type="text" id="characterInput" class="character-input" placeholder="Enter character name...">
+                    <button class="submit-guess-btn" id="submitGuess" onclick="submitGuess()">Submit Guess</button>
+                    <div class="feedback-message" id="feedbackMessage"></div>
+                    <p style="text-align: center; font-size: 0.9rem; opacity: 0.7; margin-top: 1rem;">Hint: Think about iconic PlayStation exclusive characters</p>
+                </div>
+
+                <div class="character-results" id="characterResults">
+                    <div class="unlock-animation" id="unlockIcon">🔓</div>
+                    <h2 class="results-title" id="resultsTitle">History Unlocked!</h2>
+                    <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;" id="resultsMessage"></p>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--ps-accent); margin-bottom: 2rem;" id="scoreDisplay"></div>
+                    <div>
+                        <a href="ps-history.html" class="history-btn" id="historyBtn" style="display: none;">PlayStation History</a>
+                        <button class="retry-btn" onclick="restartQuiz()">Try Again</button>
+                        <a href="community.html" class="retry-btn">Back to Community</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const characters = [
+            {
+                image: "kratos-ghost-of-3840x2160-16038.jpg",
+                question: "Who is this legendary Spartan warrior turned Norse god slayer?",
+                answers: ["kratos", "kratos god of war", "god of war kratos", "kratos gow"]
+            },
+            {
+                image: "aloy-horizon-forbidden-west-2022-games-3840x2160-7889.jpg", 
+                question: "Name this skilled hunter from a post-apocalyptic world filled with robotic creatures.",
+                answers: ["aloy", "aloy horizon", "horizon aloy", "aloy hzd", "aloy hfw"]
+            },
+            {
+                image: "ellie-williams-the-7464x3290-13663.jpg",
+                question: "Who is this survivor from a world overrun by infected creatures?",
+                answers: ["ellie", "ellie williams", "ellie last of us", "last of us ellie", "ellie tlou"]
+            }
+        ];
+
+        let currentCharacter = 0;
+        let score = 0;
+
+        function showCharacter() {
+            const character = characters[currentCharacter];
+            document.getElementById('characterImage').src = character.image;
+            document.getElementById('characterQuestion').textContent = character.question;
+            document.getElementById('characterInput').value = '';
+            document.getElementById('feedbackMessage').textContent = '';
+            document.getElementById('attemptsCounter').textContent = `Question ${currentCharacter + 1} of ${characters.length}`;
+            document.getElementById('submitGuess').disabled = false;
+        }
+
+        function submitGuess() {
+            const input = document.getElementById('characterInput').value.toLowerCase().trim();
+            const character = characters[currentCharacter];
+            const feedbackElement = document.getElementById('feedbackMessage');
+            
+            if (!input) {
+                feedbackElement.textContent = 'Please enter a character name!';
+                feedbackElement.className = 'feedback-message feedback-incorrect';
+                return;
+            }
+
+            const isCorrect = character.answers.some(answer => 
+                input.includes(answer.toLowerCase()) || answer.toLowerCase().includes(input)
+            );
+
+            document.getElementById('submitGuess').disabled = true;
+
+            if (isCorrect) {
+                score++;
+                feedbackElement.textContent = 'Correct! Well done!';
+                feedbackElement.className = 'feedback-message feedback-correct';
+            } else {
+                feedbackElement.textContent = `Incorrect! The answer was: ${character.answers[0]}`;
+                feedbackElement.className = 'feedback-message feedback-incorrect';
+            }
+
+            setTimeout(() => {
+                currentCharacter++;
+                if (currentCharacter < characters.length) {
+                    showCharacter();
+                } else {
+                    showResults();
+                }
+            }, 2500);
+        }
+
+        function showResults() {
+            document.getElementById('characterQuizContent').style.display = 'none';
+            document.getElementById('characterResults').style.display = 'block';
+            
+            const resultsContainer = document.getElementById('characterResults');
+            const unlockIcon = document.getElementById('unlockIcon');
+            const resultsTitle = document.getElementById('resultsTitle');
+            const resultsMessage = document.getElementById('resultsMessage');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const historyBtn = document.getElementById('historyBtn');
+            
+            scoreDisplay.textContent = `Your Score: ${score} out of ${characters.length}`;
+            
+            if (score >= 2) {
+                // Success - unlock PlayStation history
+                resultsContainer.classList.remove('fail-message');
+                unlockIcon.textContent = '🔓';
+                resultsTitle.textContent = 'History Unlocked!';
+                resultsTitle.style.color = '#00ff00';
+                resultsTitle.style.textShadow = '0 0 20px #00ff00';
+                resultsMessage.textContent = 'Incredible! Your PlayStation knowledge has unlocked access to the complete history and evolution of PlayStation consoles!';
+                historyBtn.style.display = 'inline-block';
+                
+                // Add unlock effect
+                createUnlockEffect();
+            } else {
+                // Failure - encourage to try again
+                resultsContainer.classList.add('fail-message');
+                unlockIcon.textContent = '🔒';
+                resultsTitle.textContent = 'Almost There!';
+                resultsTitle.style.color = '#ff4444';
+                resultsTitle.style.textShadow = '0 0 20px #ff4444';
+                resultsMessage.textContent = 'You need at least 2 correct answers to unlock the PlayStation history. These characters are legendary - give it another shot!';
+                historyBtn.style.display = 'none';
+            }
+        }
+
+        function createUnlockEffect() {
+            const colors = ['#00ff00', '#00cc00', '#00aa00', '#008800'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.style.position = 'fixed';
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.top = '-10px';
+                    particle.style.width = '8px';
+                    particle.style.height = '8px';
+                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.borderRadius = '50%';
+                    particle.style.pointerEvents = 'none';
+                    particle.style.zIndex = '9999';
+                    particle.style.animation = 'unlockFall 3s linear forwards';
+                    
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+
+        function restartQuiz() {
+            currentCharacter = 0;
+            score = 0;
+            document.getElementById('characterQuizContent').style.display = 'block';
+            document.getElementById('characterResults').style.display = 'none';
+            showCharacter();
+        }
+
+        // Add CSS for unlock animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes unlockFall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Handle Enter key in input
+        document.getElementById('characterInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitGuess();
+            }
+        });
+
+        // Start the quiz when page loads
+        showCharacter();
+    </script>
+
+    <script src="script.js"></script>
+    <script src="clean-nav.js"></script>
+</body>
+</html>

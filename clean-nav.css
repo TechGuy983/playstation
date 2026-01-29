@@ -1,0 +1,391 @@
+/* Clean Logo-Only Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    position: relative;
+}
+
+.clickable-logo {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1001;
+}
+
+.clickable-logo:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation Menu - Hidden by default */
+.nav-menu {
+    position: absolute;
+    top: 50%;
+    left: 400px;
+    transform: translateY(-50%);
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.nav-menu.nav-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.nav-menu.nav-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.nav-link {
+    color: var(--ps-white);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--ps-accent);
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--ps-accent);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 80%;
+}
+
+/* Expanded navbar state */
+.navbar.expanded {
+    background: rgba(10, 10, 10, 0.98);
+    padding: 1.5rem 0;
+}
+
+.navbar.expanded .nav-container {
+    justify-content: flex-start;
+    gap: 4rem;
+}
+
+.navbar.expanded .nav-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    margin-left: 2rem;
+}
+
+.navbar.expanded .hamburger {
+    margin-left: auto;
+}
+
+/* PlayStation Logo Styles */
+.ps-logo-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 80px;
+    flex-shrink: 0;
+}
+
+.ps-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--ps-accent);
+    text-shadow: 0 0 15px var(--ps-accent);
+}
+
+.ps-symbols {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+    margin-left: 15px;
+    opacity: 0;
+    transform: translateY(-50%) translateX(-20px);
+    transition: all 0.8s ease-out;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.ps-symbols.show {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.ps-symbol {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(0) rotate(180deg);
+    transition: all 0.3s ease-out;
+}
+
+.ps-symbols.show .ps-symbol {
+    transform: scale(1) rotate(0deg);
+}
+
+.ps-symbols.show .ps-symbol.triangle {
+    background: #00ff00;
+    color: #000;
+    transition-delay: 0.1s;
+}
+
+.ps-symbols.show .ps-symbol.square {
+    background: #ff69b4;
+    color: #000;
+    transition-delay: 0.2s;
+}
+
+.ps-symbols.show .ps-symbol.circle {
+    background: #ff0000;
+    color: #fff;
+    transition-delay: 0.3s;
+}
+
+.ps-symbols.show .ps-symbol.x {
+    background: #0080ff;
+    color: #fff;
+    transition-delay: 0.4s;
+}
+
+/* Typing Effect */
+.ps-logo.typing {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typeWriter 1.8s steps(11, end) forwards;
+}
+
+.ps-logo.typing::after {
+    content: '|';
+    animation: blink 1s infinite;
+    margin-left: 2px;
+}
+
+@keyframes typeWriter {
+    0% { width: 0; }
+    100% { width: 11ch; }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        padding: 2rem;
+        border-top: 1px solid rgba(0, 212, 255, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transform: translateY(-100%);
+    }
+    
+    .nav-menu.nav-visible {
+        transform: translateY(0);
+    }
+    
+    .nav-menu.nav-hidden {
+        transform: translateY(-100%);
+    }
+    
+    .nav-menu li {
+        margin: 1rem 0;
+        text-align: center;
+    }
+    
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 1rem;
+        display: block;
+        border-radius: 10px;
+    }
+    
+    .ps-logo-container {
+        margin-right: 40px;
+    }
+    
+    .ps-symbols {
+        margin-left: 8px;
+        gap: 4px;
+    }
+    
+    .ps-symbol {
+        width: 14px;
+        height: 14px;
+        font-size: 10px;
+    }
+    
+    .navbar.expanded .nav-container {
+        justify-content: space-between;
+        gap: 0;
+    }
+    
+    .navbar.expanded .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        margin-left: 0;
+    }
+}
+
+/* Click indicator */
+.clickable-logo::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.clickable-logo:hover::before {
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+/* Hamburger Menu */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+    position: relative;
+    margin-left: auto;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--ps-accent);
+    margin: 3px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.hamburger:hover span {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+    background: #00f0ff;
+}
+
+/* Navigation Overlay */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Update nav-container for hamburger */
+.nav-container {
+    justify-content: space-between;
+}
+
+/* Desktop - hide hamburger */
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
+    }
+    
+    .nav-overlay {
+        display: none !important;
+    }
+}
+
+/* Mobile - show hamburger, adjust menu */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .clickable-logo {
+        order: 1;
+    }
+    
+    .hamburger {
+        order: 2;
+    }
+}
