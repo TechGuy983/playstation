@@ -450,9 +450,96 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize responsive features
     initResponsiveFeatures();
 
+    // Video thumbnail and loading enhancements
+    function initVideoEnhancements() {
+        const videoContainers = document.querySelectorAll('.video-container');
+        
+        videoContainers.forEach(container => {
+            const iframe = container.querySelector('iframe');
+            if (iframe) {
+                // Add loading state
+                container.classList.add('loading');
+                
+                // Create a placeholder for better thumbnail display
+                const placeholder = document.createElement('div');
+                placeholder.className = 'video-placeholder';
+                placeholder.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(135deg, #0a0a0a 0%, #1e1e1e 100%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1;
+                    transition: opacity 0.3s ease;
+                `;
+                
+                // Add PlayStation logo to placeholder
+                const logoPlaceholder = document.createElement('div');
+                logoPlaceholder.innerHTML = `
+                    <div style="color: #00d4ff; font-size: 2rem; font-family: 'Orbitron', monospace; text-shadow: 0 0 15px #00d4ff;">
+                        PlayStation
+                    </div>
+                    <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 0.5rem;">
+                        Loading video...
+                    </div>
+                `;
+                placeholder.appendChild(logoPlaceholder);
+                container.appendChild(placeholder);
+                
+                // Handle iframe load
+                iframe.addEventListener('load', () => {
+                    container.classList.remove('loading');
+                    placeholder.style.opacity = '0';
+                    setTimeout(() => {
+                        if (placeholder.parentNode) {
+                            placeholder.remove();
+                        }
+                    }, 300);
+                });
+                
+                // Optimize YouTube thumbnail loading
+                if (iframe.src.includes('youtube.com') || iframe.src.includes('youtu.be')) {
+                    // Add parameters for better thumbnail quality
+                    const url = new URL(iframe.src);
+                    url.searchParams.set('modestbranding', '1');
+                    url.searchParams.set('rel', '0');
+                    url.searchParams.set('showinfo', '0');
+                    iframe.src = url.toString();
+                }
+                
+                // Add click enhancement for better interaction
+                container.addEventListener('click', function(e) {
+                    // Add a subtle click effect
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+                
+                // Improve hover interaction
+                container.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px) scale(1.02)';
+                });
+                
+                container.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            }
+        });
+    }
+    
+    // Initialize video enhancements
+    initVideoEnhancements();
+
     // Handle orientation change
     window.addEventListener('orientationchange', function() {
         setTimeout(() => {
             // Recalculate layouts after orientation change - handled by clean-nav.js
+            // Re-initialize video enhancements for proper aspect ratio
+            initVideoEnhancements();
         }, 100);
     });

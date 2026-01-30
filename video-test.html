@@ -3,36 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Test</title>
+    <title>Video Thumbnail Test</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div style="padding: 2rem;">
-        <h1>Video Aspect Ratio Test</h1>
+    <div style="padding: 2rem; background: linear-gradient(135deg, #0a0a0a 0%, #1e1e1e 50%, #003087 100%); min-height: 100vh; color: white;">
+        <h1 style="text-align: center; color: #00d4ff; font-family: 'Orbitron', monospace; margin-bottom: 3rem;">Video Thumbnail Aspect Ratio Test</h1>
         
-        <h2>Single Video</h2>
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/RkC0l4iekYo" 
+        <h2 style="color: #00d4ff; margin-bottom: 1rem;">Single Video - Perfect 16:9 Thumbnail</h2>
+        <div class="video-container" style="margin-bottom: 3rem;">
+            <iframe src="https://www.youtube.com/embed/RkC0l4iekYo?modestbranding=1&rel=0" 
                     title="PlayStation Showcase" frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen></iframe>
         </div>
         
-        <h2>Video Grid</h2>
+        <h2 style="color: #00d4ff; margin-bottom: 1rem;">Video Grid - Consistent Thumbnail Aspect Ratios</h2>
         <div class="video-grid">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/F_f6TKEe5Ng" 
+                <iframe src="https://www.youtube.com/embed/F_f6TKEe5Ng?modestbranding=1&rel=0" 
                         title="Game Trailer" frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen></iframe>
             </div>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/ZkLPKd-Vs8g" 
+                <iframe src="https://www.youtube.com/embed/ZkLPKd-Vs8g?modestbranding=1&rel=0" 
                         title="The Last of Us Part II Trailer" frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen></iframe>
             </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dMK_npDG12Q?modestbranding=1&rel=0" 
+                        title="PlayStation 5 Features" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 212, 255, 0.1); border-radius: 10px; border: 1px solid rgba(0, 212, 255, 0.3);">
+            <h3 style="color: #00d4ff; margin-bottom: 0.5rem;">Thumbnail Enhancements:</h3>
+            <ul style="line-height: 1.6;">
+                <li>✅ Perfect 16:9 aspect ratio maintained</li>
+                <li>✅ YouTube thumbnails optimized for rectangular display</li>
+                <li>✅ Hover effects with custom play button overlay</li>
+                <li>✅ Loading states with PlayStation branding</li>
+                <li>✅ Responsive design for all screen sizes</li>
+                <li>✅ Enhanced visual feedback on interaction</li>
+            </ul>
         </div>
     </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>

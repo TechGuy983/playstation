@@ -381,6 +381,14 @@ body {
     position: relative;
     width: 100%;
     aspect-ratio: 16/9;
+    background: #000;
+    transition: all 0.3s ease;
+}
+
+.video-container:hover {
+    border-color: var(--ps-accent);
+    box-shadow: 0 25px 70px rgba(0, 212, 255, 0.3);
+    transform: translateY(-2px);
 }
 
 .video-container iframe {
@@ -391,6 +399,8 @@ body {
     height: 100%;
     border-radius: 18px;
     border: none;
+    object-fit: cover;
+    background: #000;
 }
 
 /* Fallback for browsers that don't support aspect-ratio */
@@ -398,6 +408,124 @@ body {
     .video-container {
         padding-bottom: 56.25%; /* 16:9 aspect ratio */
         height: 0;
+    }
+}
+
+/* Video loading state and thumbnail optimization */
+.video-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(0, 212, 255, 0.3);
+    border-top: 3px solid var(--ps-accent);
+    border-radius: 50%;
+    animation: videoLoading 1s linear infinite;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-container.loading::before {
+    opacity: 1;
+}
+
+@keyframes videoLoading {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Ensure YouTube thumbnails fit properly */
+.video-container iframe[src*="youtube"] {
+    background: #000;
+}
+
+/* Custom play button overlay for better thumbnail interaction */
+.video-container::after {
+    content: '▶';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.7);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.video-container:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+    background: rgba(0, 212, 255, 0.8);
+    border-color: var(--ps-accent);
+}
+
+/* Video placeholder and thumbnail optimization */
+.video-placeholder {
+    border-radius: 18px;
+}
+
+/* Ensure YouTube thumbnails maintain aspect ratio */
+.video-container iframe[src*="youtube.com"],
+.video-container iframe[src*="youtu.be"] {
+    background: #000;
+    object-fit: cover;
+}
+
+/* Enhanced video container for better thumbnail display */
+.video-container {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1e1e1e 100%);
+}
+
+/* Video grid specific thumbnail adjustments */
+.video-grid .video-container {
+    min-height: 200px;
+}
+
+.video-grid .video-container::after {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+}
+
+/* Mobile optimizations for video thumbnails */
+@media (max-width: 768px) {
+    .video-container::after {
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .video-grid .video-container::after {
+        font-size: 1.8rem;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-container::after {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .video-grid .video-container {
+        min-height: 180px;
     }
 }
 
