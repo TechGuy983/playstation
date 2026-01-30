@@ -1,5 +1,297 @@
 // PlayStation Universe JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize loading screen
+    initLoadingScreen();
+    
+    // Loading Screen Functionality
+    function initLoadingScreen() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const progressBar = document.getElementById('progressBar');
+        const loadingText = document.getElementById('loadingText');
+        const particlesContainer = document.getElementById('loadingParticles');
+        
+        if (!loadingScreen) return;
+        
+        // Create floating particles
+        function createParticles() {
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                
+                // Add different particle types
+                const particleType = Math.floor(Math.random() * 4);
+                switch(particleType) {
+                    case 0:
+                        particle.classList.add('particle-triangle');
+                        particle.innerHTML = '▲';
+                        break;
+                    case 1:
+                        particle.classList.add('particle-square');
+                        particle.innerHTML = '■';
+                        break;
+                    case 2:
+                        particle.classList.add('particle-circle');
+                        particle.innerHTML = '●';
+                        break;
+                    case 3:
+                        particle.classList.add('particle-x');
+                        particle.innerHTML = '✕';
+                        break;
+                }
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+        
+        // Add sound effect simulation
+        function playLoadingSound() {
+            // Create audio context for sound effects (visual feedback)
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            function createBeep(frequency, duration, volume = 0.1) {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration);
+            }
+            
+            // PlayStation startup sound simulation
+            setTimeout(() => createBeep(440, 0.2), 500);
+            setTimeout(() => createBeep(554, 0.2), 700);
+            setTimeout(() => createBeep(659, 0.3), 900);
+        }
+        
+        // Try to play sound (user interaction required for audio)
+        try {
+            playLoadingSound();
+        } catch (e) {
+            console.log('Audio context requires user interaction');
+        }
+        
+        // Enhanced loading messages with more detail
+        const loadingMessages = [
+            'Initializing PlayStation Universe...',
+            'Loading game assets and textures...',
+            'Connecting to PlayStation Network...',
+            'Preparing exclusive content library...',
+            'Optimizing graphics and performance...',
+            'Synchronizing user preferences...',
+            'Finalizing system components...',
+            'Welcome to PlayStation Universe!'
+        ];
+        
+        // Add loading tips
+        const loadingTips = [
+            'Did you know? PlayStation has sold over 500 million consoles worldwide!',
+            'Tip: Use the PlayStation symbols to navigate - they\'re not just decorative!',
+            'Fun fact: The PlayStation controller\'s symbols have meanings - Triangle represents viewpoint, Square represents documents, Circle means "yes" and X means "no".',
+            'PlayStation VR2 features eye tracking and haptic feedback in the headset!',
+            'The PS5\'s SSD can load 5GB of data in just one second!',
+            'PlayStation Studios has created some of the most awarded games in history!'
+        ];
+        
+        let messageIndex = 0;
+        let progress = 0;
+        let tipIndex = 0;
+        
+        // Add tip display
+        const tipElement = document.createElement('div');
+        tipElement.className = 'loading-tip';
+        tipElement.textContent = loadingTips[0];
+        loadingScreen.appendChild(tipElement);
+        
+        // Rotate tips during loading
+        const tipInterval = setInterval(() => {
+            tipIndex = (tipIndex + 1) % loadingTips.length;
+            tipElement.style.opacity = '0';
+            setTimeout(() => {
+                tipElement.textContent = loadingTips[tipIndex];
+                tipElement.style.opacity = '1';
+            }, 300);
+        }, 3000);
+        
+        // Simulate loading progress
+        const loadingInterval = setInterval(() => {
+            progress += Math.random() * 15 + 5;
+            
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(loadingInterval);
+                clearInterval(tipInterval);
+                
+                // Final message
+                loadingText.textContent = loadingMessages[loadingMessages.length - 1];
+                
+                // Add completion effects
+                addCompletionEffects();
+                
+                // Hide loading screen after completion
+                setTimeout(() => {
+                    loadingScreen.classList.add('fade-out');
+                    
+                    // Remove from DOM after fade out
+                    setTimeout(() => {
+                        loadingScreen.remove();
+                        // Initialize other components after loading
+                        initializeMainContent();
+                    }, 800);
+                }, 1000);
+            } else {
+                // Update progress bar
+                progressBar.style.width = progress + '%';
+                
+                // Update loading message
+                const newMessageIndex = Math.floor((progress / 100) * (loadingMessages.length - 1));
+                if (newMessageIndex !== messageIndex && newMessageIndex < loadingMessages.length - 1) {
+                    messageIndex = newMessageIndex;
+                    loadingText.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingText.textContent = loadingMessages[messageIndex];
+                        loadingText.style.opacity = '1';
+                    }, 200);
+                }
+                
+                // Add progress milestone effects
+                if (progress >= 25 && !loadingScreen.classList.contains('milestone-25')) {
+                    loadingScreen.classList.add('milestone-25');
+                    createProgressBurst();
+                }
+                if (progress >= 50 && !loadingScreen.classList.contains('milestone-50')) {
+                    loadingScreen.classList.add('milestone-50');
+                    createProgressBurst();
+                }
+                if (progress >= 75 && !loadingScreen.classList.contains('milestone-75')) {
+                    loadingScreen.classList.add('milestone-75');
+                    createProgressBurst();
+                }
+            }
+        }, 200 + Math.random() * 300);
+        
+        // Add completion effects
+        function addCompletionEffects() {
+            // Make symbols spin faster
+            const symbols = loadingScreen.querySelectorAll('.loading-symbol');
+            symbols.forEach((symbol, index) => {
+                setTimeout(() => {
+                    symbol.style.animation = 'symbolComplete 0.8s ease-out forwards';
+                }, index * 100);
+            });
+            
+            // Progress bar completion glow
+            progressBar.style.boxShadow = '0 0 30px rgba(0, 212, 255, 1)';
+            
+            // Logo final glow
+            const logo = loadingScreen.querySelector('.loading-logo');
+            logo.style.animation = 'logoComplete 1s ease-out forwards';
+        }
+        
+        // Create progress milestone burst effect
+        function createProgressBurst() {
+            for (let i = 0; i < 10; i++) {
+                const burst = document.createElement('div');
+                burst.className = 'progress-burst';
+                burst.style.left = '50%';
+                burst.style.top = '60%';
+                burst.style.transform = `translate(-50%, -50%) rotate(${i * 36}deg)`;
+                loadingScreen.appendChild(burst);
+                
+                setTimeout(() => {
+                    burst.remove();
+                }, 1000);
+            }
+        }
+        
+        // Add click to skip (for development/testing)
+        loadingScreen.addEventListener('click', () => {
+            clearInterval(loadingInterval);
+            clearInterval(tipInterval);
+            progress = 100;
+            progressBar.style.width = '100%';
+            loadingText.textContent = 'Loading complete!';
+            
+            // Add skip effects
+            addCompletionEffects();
+            
+            setTimeout(() => {
+                loadingScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingScreen.remove();
+                    initializeMainContent();
+                }, 800);
+            }, 500);
+        });
+        
+        // Add hover effects to symbols
+        const symbols = loadingScreen.querySelectorAll('.loading-symbol');
+        symbols.forEach(symbol => {
+            symbol.addEventListener('mouseenter', () => {
+                symbol.style.transform = 'scale(1.2) rotate(10deg)';
+                symbol.style.boxShadow = '0 12px 25px rgba(0, 0, 0, 0.6)';
+            });
+            
+            symbol.addEventListener('mouseleave', () => {
+                symbol.style.transform = '';
+                symbol.style.boxShadow = '';
+            });
+            
+            symbol.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Individual symbol click effect
+                symbol.style.animation = 'symbolComplete 0.5s ease-out';
+                setTimeout(() => {
+                    symbol.style.animation = '';
+                }, 500);
+            });
+        });
+        
+        // Add keyboard skip functionality
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+                loadingScreen.click();
+            }
+        });
+    }
+    
+    // Initialize main content after loading screen
+    function initializeMainContent() {
+        // Start slideshow
+        createSlideshow();
+        
+        // Initialize all other features
+        initPlayStationLogo();
+        initVideoEnhancements();
+        initResponsiveFeatures();
+        
+        // Add entrance animations to main content
+        const mainContent = document.querySelector('main');
+        if (mainContent) {
+            mainContent.style.opacity = '0';
+            mainContent.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                mainContent.style.transition = 'all 0.8s ease-out';
+                mainContent.style.opacity = '1';
+                mainContent.style.transform = 'translateY(0)';
+            }, 100);
+        }
+    }
+    
     // Slideshow background images
     const slideshowImages = [
         'battlefield-6-5120x2880-23496.jpg',
@@ -56,8 +348,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('Slideshow created with', slideshowImages.length, 'images');
     }
-
-    createSlideshow();
+    
+    // Don't create slideshow immediately - wait for loading screen to complete
+    // createSlideshow(); // Moved to initializeMainContent()
 
     // Card click effects with running PlayStation symbols
     function addClickEffect(element, event) {
@@ -267,8 +560,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Initialize logo effect
-    initPlayStationLogo();
+    // Initialize logo effect - moved to initializeMainContent()
+    // initPlayStationLogo(); // Moved to after loading screen
     
     // Add symbol click effects
     const symbols = document.querySelectorAll('.ps-symbol');
@@ -447,8 +740,8 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', handleResponsiveFonts);
     }
 
-    // Initialize responsive features
-    initResponsiveFeatures();
+    // Initialize responsive features - moved to initializeMainContent()
+    // initResponsiveFeatures(); // Moved to after loading screen
 
     // Video thumbnail and loading enhancements
     function initVideoEnhancements() {
@@ -532,8 +825,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Initialize video enhancements
-    initVideoEnhancements();
+    // Initialize video enhancements - moved to initializeMainContent()
+    // initVideoEnhancements(); // Moved to after loading screen
 
     // Handle orientation change
     window.addEventListener('orientationchange', function() {
