@@ -896,6 +896,65 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 3000);
             }
         });
+        
+        // Add mobile-friendly alternative access method
+        addMobileSecretAccess();
+    }
+    
+    function addMobileSecretAccess() {
+        // Create a hidden button that appears after multiple taps on PlayStation symbols
+        let symbolTapCount = 0;
+        const symbols = document.querySelectorAll('.ps-symbol, .symbol');
+        
+        symbols.forEach(symbol => {
+            symbol.addEventListener('click', () => {
+                symbolTapCount++;
+                
+                // Show visual feedback
+                symbol.style.transform = 'scale(1.2)';
+                symbol.style.color = 'var(--ps-gold)';
+                setTimeout(() => {
+                    symbol.style.transform = '';
+                    symbol.style.color = '';
+                }, 200);
+                
+                // After 5 symbol taps, show secret access
+                if (symbolTapCount >= 5) {
+                    showMobileSecretAccess();
+                    symbolTapCount = 0;
+                }
+                
+                // Reset counter after 10 seconds
+                setTimeout(() => {
+                    symbolTapCount = Math.max(0, symbolTapCount - 1);
+                }, 10000);
+            });
+        });
+    }
+    
+    function showMobileSecretAccess() {
+        const mobileSecret = document.createElement('div');
+        mobileSecret.className = 'mobile-secret-access';
+        mobileSecret.innerHTML = `
+            <div class="mobile-secret-content">
+                <div class="mobile-secret-icon">🎮</div>
+                <div class="mobile-secret-title">Secret Discovered!</div>
+                <div class="mobile-secret-text">You found the hidden PlayStation challenge</div>
+                <button class="mobile-secret-btn" onclick="activateSecretQuiz()">Take the Quiz</button>
+            </div>
+        `;
+        
+        document.body.appendChild(mobileSecret);
+        
+        // Auto-remove after 8 seconds
+        setTimeout(() => {
+            mobileSecret.classList.add('fade-out');
+            setTimeout(() => {
+                if (mobileSecret.parentNode) {
+                    mobileSecret.remove();
+                }
+            }, 500);
+        }, 8000);
     }
     
     function showSecretMessage() {
@@ -905,12 +964,26 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="secret-popup-content">
                 <div class="secret-popup-icon">🔐</div>
                 <div class="secret-popup-text">Secret Access Available</div>
-                <div class="secret-popup-instruction">Type "test" to unlock hidden content</div>
+                <div class="secret-popup-instruction">
+                    <div class="desktop-instruction">Type "test" to unlock hidden content</div>
+                    <div class="mobile-instruction">Tap here to unlock hidden content</div>
+                </div>
                 <div class="secret-popup-timer">
                     <div class="timer-bar"></div>
                 </div>
             </div>
         `;
+        
+        // Add click/tap functionality for mobile
+        secretMsg.addEventListener('click', () => {
+            activateSecretQuiz();
+        });
+        
+        // Add touch event for better mobile support
+        secretMsg.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            activateSecretQuiz();
+        });
         
         document.body.appendChild(secretMsg);
         
