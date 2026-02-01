@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battlefield 6 - Exclusive Intel</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.svg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="clean-nav.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .exclusive-hero {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2) 0%, rgba(255, 140, 66, 0.1) 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exclusive-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 140, 66, 0.2) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .exclusive-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .exclusive-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+        }
+        
+        .exclusive-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+        
+        .content-section {
+            padding: 4rem 0;
+            margin: 2rem 0;
+        }
+        
+        .content-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .content-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            color: #ff6b35;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .content-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-item {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .feature-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 120px;
+            left: 20px;
+            background: rgba(255, 107, 53, 0.2);
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-btn:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        /* Mobile responsive for slideshow */
+        @media (max-width: 768px) {
+            .slideshow-container {
+                max-width: 95%;
+                margin: 0 auto;
+                border-radius: 20px;
+            }
+            
+            .slideshow-wrapper {
+                height: 400px;
+            }
+            
+            .slide-caption {
+                padding: 3rem 1.5rem 2rem;
+            }
+            
+            .slide-caption h3 {
+                font-size: 2rem;
+            }
+            
+            .slide-caption p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            
+            .slide-nav {
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+                padding: 1rem;
+            }
+            
+            .slide-nav.prev {
+                left: 15px;
+            }
+            
+            .slide-nav.next {
+                right: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slideshow-wrapper {
+                height: 300px;
+            }
+            
+            .slide-caption {
+                padding: 2rem 1rem 1.5rem;
+            }
+            
+            .slide-caption h3 {
+                font-size: 1.6rem;
+            }
+            
+            .slide-caption p {
+                font-size: 0.9rem;
+            }
+            
+            .slide-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            .slide-nav.prev {
+                left: 10px;
+            }
+            
+            .slide-nav.next {
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .exclusive-title {
+                font-size: 2.5rem;
+            }
+            
+            .exclusive-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .content-card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .content-title {
+                font-size: 2rem;
+            }
+            
+            .content-text {
+                font-size: 1.1rem;
+                line-height: 1.7;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+            
+            .feature-item {
+                padding: 1.5rem;
+            }
+            
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+            
+            .feature-title {
+                font-size: 1.3rem;
+            }
+            
+            .feature-description {
+                font-size: 0.95rem;
+                line-height: 1.5;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .back-btn {
+                top: 110px;
+                left: 10px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .exclusive-title {
+                font-size: 2rem;
+            }
+            
+            .exclusive-subtitle {
+                font-size: 1rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+                margin: 0.5rem;
+            }
+            
+            .content-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-text {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .feature-item {
+                padding: 1rem;
+            }
+            
+            .feature-icon {
+                font-size: 2rem;
+            }
+            
+            .feature-title {
+                font-size: 1.2rem;
+            }
+            
+            .feature-description {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Text wrapping and overflow fixes */
+        .content-text, .feature-description, .slide-caption p {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            -ms-hyphens: auto;
+        }
+        
+        /* Ensure all containers are responsive */
+        .container {
+            max-width: 100%;
+            padding: 0 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+        
+        /* Slideshow Backdrop */
+        .slideshow-backdrop {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1400px;
+            height: 800px;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(255, 107, 53, 0.4) 0%,
+                rgba(255, 140, 66, 0.3) 25%,
+                rgba(255, 69, 0, 0.3) 50%,
+                rgba(255, 165, 0, 0.2) 75%,
+                transparent 100%
+            );
+            filter: blur(60px);
+            animation: backdropPulse 10s ease-in-out infinite alternate;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes backdropPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.8;
+                background: radial-gradient(
+                    ellipse at center,
+                    rgba(255, 107, 53, 0.4) 0%,
+                    rgba(255, 140, 66, 0.3) 25%,
+                    rgba(255, 69, 0, 0.3) 50%,
+                    rgba(255, 165, 0, 0.2) 75%,
+                    transparent 100%
+                );
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+                background: radial-gradient(
+                    ellipse at center,
+                    rgba(255, 69, 0, 0.5) 0%,
+                    rgba(255, 165, 0, 0.4) 25%,
+                    rgba(255, 107, 53, 0.4) 50%,
+                    rgba(255, 140, 66, 0.3) 75%,
+                    transparent 100%
+                );
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.9;
+                background: radial-gradient(
+                    ellipse at center,
+                    rgba(255, 140, 66, 0.5) 0%,
+                    rgba(255, 69, 0, 0.4) 25%,
+                    rgba(255, 165, 0, 0.4) 50%,
+                    rgba(255, 107, 53, 0.3) 75%,
+                    transparent 100%
+                );
+            }
+        }
+        
+        /* Slideshow Backdrop Secondary */
+        .slideshow-backdrop-secondary {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 600px;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 107, 53, 0.3) 0%,
+                rgba(255, 140, 66, 0.25) 25%,
+                rgba(255, 69, 0, 0.25) 50%,
+                rgba(255, 165, 0, 0.2) 75%,
+                rgba(255, 107, 53, 0.3) 100%
+            );
+            background-size: 300% 300%;
+            filter: blur(40px);
+            animation: battlefieldGradientShift 8s ease infinite;
+            z-index: -1;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+        
+        @keyframes battlefieldGradientShift {
+            0% { 
+                background-position: 0% 50%;
+            }
+            50% { 
+                background-position: 100% 50%;
+            }
+            100% { 
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: transparent;
+            border-radius: 0;
+            overflow: visible;
+            border: 2px solid transparent;
+            background-image: 
+                linear-gradient(transparent, transparent),
+                linear-gradient(45deg, var(--gta-orange), #ff8c42, #ff4500);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        
+        .slideshow-wrapper {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            background: transparent;
+            z-index: 1;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: scale(0.95);
+            z-index: 1;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            z-index: 2;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.8) contrast(1.1);
+        }
+        
+        .slide.active img {
+            transform: scale(1.02);
+            filter: brightness(0.9) contrast(1.2);
+        }
+        
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(
+                transparent 0%,
+                rgba(0, 0, 0, 0.8) 50%,
+                rgba(0, 0, 0, 0.95) 100%
+            );
+            padding: 4rem 3rem 2.5rem;
+            color: var(--rockstar-white);
+            text-align: center;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .slide-caption::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                #ff6b35 25%,
+                #ff8c42 50%,
+                #ff4500 75%,
+                transparent 100%
+            );
+            animation: neonScan 3s ease-in-out infinite;
+        }
+        
+        .slide-caption h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #ff6b35, #ff8c42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            font-weight: 400;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+            animation: titleGlow 4s ease-in-out infinite alternate;
+        }
+        
+        .slide-caption p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .slide-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #ff6b35;
+            border: 2px solid #ff6b35;
+            padding: 1.2rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            border-radius: 0;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 15;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ff6b35;
+            box-shadow: 
+                0 0 20px rgba(255, 107, 53, 0.3),
+                inset 0 0 20px rgba(255, 107, 53, 0.1);
+        }
+        
+        .slide-nav:hover {
+            background: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+            box-shadow: 
+                0 0 30px rgba(255, 107, 53, 0.8),
+                0 0 50px rgba(255, 107, 53, 0.4),
+                inset 0 0 30px rgba(255, 107, 53, 0.2);
+            text-shadow: none;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .slide-nav.prev {
+            left: 25px;
+        }
+        
+        .slide-nav.next {
+            right: 25px;
+        }
+        
+        @keyframes neonScan {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes titleGlow {
+            0% { 
+                text-shadow: 
+                    0 2px 4px rgba(0, 0, 0, 0.8),
+                    0 0 20px rgba(255, 107, 53, 0.3);
+            }
+            100% { 
+                text-shadow: 
+                    0 2px 4px rgba(0, 0, 0, 0.8),
+                    0 0 30px rgba(255, 107, 53, 0.6),
+                    0 0 40px rgba(255, 140, 66, 0.4),
+                    0 0 50px rgba(255, 69, 0, 0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo clickable-logo">
+                <div class="ps-logo-container">
+                    <span class="ps-logo typing">PlayStation</span>
+                    <div class="ps-symbols">
+                        <div class="ps-symbol triangle">▲</div>
+                        <div class="ps-symbol square">■</div>
+                        <div class="ps-symbol circle">●</div>
+                        <div class="ps-symbol x">✕</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu nav-hidden">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="games.html" class="nav-link">Games</a></li>
+                <li><a href="exclusives.html" class="nav-link">Exclusives</a></li>
+                <li><a href="community.html" class="nav-link">Community</a></li>
+                <li><a href="test-categories.html" class="nav-link">Test</a></li>
+            </ul>
+        </div>
+        <div class="nav-overlay"></div>
+    </nav>
+
+    <a href="test-categories.html" class="back-btn">← Back to Tests</a>
+
+    <main style="margin-top: 100px;">
+        <section class="exclusive-hero">
+            <div class="container">
+                <h1 class="exclusive-title">BATTLEFIELD 6</h1>
+                <p class="exclusive-subtitle">🔓 Exclusive Action Gaming Intel - Unlocked!</p>
+                <p class="hero-description">
+                    Congratulations on passing the Action Gaming Test! You've gained access to exclusive Battlefield 6 content and insider information.
+                </p>
+            </div>
+        </section>
+
+        <!-- Transition Element -->
+        <div style="height: 100px; background: linear-gradient(180deg, rgba(255, 107, 53, 0.3) 0%, rgba(255, 140, 66, 0.2) 50%, transparent 100%); position: relative; z-index: 1;"></div>
+        
+        <!-- Screenshot Slideshow Section -->
+        <section class="content-section slideshow-section" style="background: transparent; padding: 5rem 0 3rem 0; position: relative; margin-top: -100px;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 200px; background: linear-gradient(180deg, rgba(255, 107, 53, 0.1) 0%, transparent 100%); pointer-events: none;"></div>
+            
+            <!-- Slideshow Backdrop -->
+            <div class="slideshow-backdrop"></div>
+            <div class="slideshow-backdrop-secondary"></div>
+            
+            <div class="container">
+                <h2 class="content-title">🎯 Exclusive Screenshots</h2>
+                <div class="slideshow-container">
+                    <div class="slideshow-wrapper">
+                        <div class="slide active">
+                            <img src="battlefield-6-5120x2880-23496.jpg" alt="Battlefield 6 Combat">
+                            <div class="slide-overlay"></div>
+                            <div class="slide-caption">
+                                <h3>Next-Gen Warfare</h3>
+                                <p>Experience the most intense 128-player battles with cutting-edge destruction and dynamic weather systems.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="battlefield-6-5120x2880-23525.jpg" alt="Battlefield 6 Vehicles">
+                            <div class="slide-overlay"></div>
+                            <div class="slide-caption">
+                                <h3>Advanced Vehicle Combat</h3>
+                                <p>Command over 50 different vehicles including hover tanks, advanced jets, and amphibious assault craft.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="battlefield-pro-5120x2880-24365.jpeg" alt="Battlefield 6 Destruction">
+                            <div class="slide-overlay"></div>
+                            <div class="slide-caption">
+                                <h3>Levolution 2.0</h3>
+                                <p>Witness unprecedented destruction as entire city blocks can be dynamically reshaped during combat.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="battlefield-redsec-5120x2880-24327.jpg" alt="Battlefield 6 Specialists">
+                            <div class="slide-overlay"></div>
+                            <div class="slide-caption">
+                                <h3>Specialist Operations</h3>
+                                <p>Master unique Specialist abilities that can turn the tide of battle in massive multiplayer engagements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation arrows -->
+                    <button class="slide-nav prev" onclick="changeSlide(-1)">❮</button>
+                    <button class="slide-nav next" onclick="changeSlide(1)">❯</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="content-card">
+                    <h2 class="content-title">🎯 Combat Revolution</h2>
+                    <p class="content-text">
+                        Battlefield 6 introduces the most advanced combat system in the franchise's history. With 128-player battles on next-gen consoles, 
+                        every engagement becomes a massive-scale warfare experience that redefines what multiplayer gaming can achieve. The new destruction engine 
+                        allows for complete environmental manipulation, where entire skyscrapers can be brought down strategically to change the battlefield dynamics, 
+                        creating new pathways, cover positions, and tactical opportunities that emerge organically during combat.
+                    </p>
+                    <p class="content-text">
+                        The weapon customization system has been completely overhauled, featuring over 200 weapon attachments and modifications that affect not just 
+                        performance but also visual appearance and handling characteristics. Players can now customize weapons in real-time during matches, adapting 
+                        to changing combat situations with the revolutionary "Plus System" that allows for instant attachment swapping without visiting a loadout screen. 
+                        This system includes advanced optics with variable zoom levels, specialized ammunition types for different scenarios, and modular components 
+                        that can be mixed and matched for optimal performance in specific combat roles.
+                    </p>
+                    <p class="content-text">
+                        The ballistics system has been rebuilt from the ground up, incorporating realistic bullet physics that account for wind resistance, gravity drop, 
+                        and environmental factors. Sniper rifles now require genuine skill to master, with bullet travel time and drop affecting long-range engagements. 
+                        The new suppression system creates authentic combat stress, where incoming fire affects accuracy and movement, encouraging tactical positioning 
+                        and team coordination over individual heroics.
+                    </p>
+                </div>
+
+                <div class="content-card">
+                    <h2 class="content-title">🌪️ Dynamic Weather Warfare</h2>
+                    <p class="content-text">
+                        Experience unprecedented weather events that dramatically alter gameplay in ways never before seen in the Battlefield franchise. Massive tornadoes 
+                        can lift vehicles and players, creating chaotic and unpredictable combat scenarios where traditional tactics must be abandoned in favor of 
+                        adaptive strategies. These weather systems aren't scripted events but dynamic occurrences that can happen at any time, forcing players to 
+                        constantly assess and reassess their tactical approach based on environmental conditions.
+                    </p>
+                    <p class="content-text">
+                        Sandstorms reduce visibility to mere meters and muffle audio cues, forcing players to rely on different tactics and enhanced teamwork strategies. 
+                        During these events, thermal optics become invaluable, close-quarters combat intensifies, and vehicle navigation becomes treacherous. The weather 
+                        system isn't just visual spectacle - it affects bullet trajectory with crosswinds, vehicle handling on wet surfaces, and even the structural 
+                        integrity of buildings during severe storms.
+                    </p>
+                    <p class="content-text">
+                        Lightning strikes can temporarily disable electronic equipment and vehicles, creating windows of vulnerability and opportunity. Rain makes surfaces 
+                        slippery, affecting movement speed and vehicle control, while fog provides natural concealment for flanking maneuvers. Blizzards in arctic maps 
+                        can freeze exposed water, creating new pathways while reducing visibility and affecting weapon performance. Each weather condition requires 
+                        different loadouts, tactics, and team coordination, adding layers of strategic depth that keep every match feeling fresh and unpredictable.
+                    </p>
+                </div>
+
+                <div class="content-card">
+                    <h2 class="content-title">🚁 Next-Generation Vehicle Combat</h2>
+                    <p class="content-text">
+                        Battlefield 6 features the most comprehensive vehicle roster in series history, with over 50 distinct land, air, and sea vehicles, each with 
+                        realistic physics and detailed damage models. The new vehicle classes include hover tanks that can traverse any terrain, advanced fighter jets 
+                        with vertical takeoff capabilities, and amphibious assault craft that seamlessly transition between water and land combat. Each vehicle type 
+                        has been designed with specific tactical roles in mind, from rapid deployment and reconnaissance to heavy assault and area denial.
+                    </p>
+                    <p class="content-text">
+                        The vehicle customization system allows for extensive modifications that affect both performance and appearance. Tank crews can choose between 
+                        different armor configurations, weapon systems, and mobility upgrades. Aircraft can be equipped with various payload options, from air-to-air 
+                        missiles for dogfighting to precision-guided munitions for ground support. Naval vessels feature modular weapon systems and defensive countermeasures 
+                        that can be tailored for specific mission requirements.
+                    </p>
+                    <p class="content-text">
+                        Vehicle physics have been completely rebuilt using advanced simulation technology that accounts for weight distribution, terrain interaction, 
+                        and realistic damage propagation. Tanks feel appropriately heavy and powerful, while maintaining the arcade accessibility that Battlefield is 
+                        known for. Aircraft handling varies significantly between different types, with helicopters requiring genuine piloting skills and jets offering 
+                        high-speed, high-risk gameplay that rewards experienced pilots with devastating effectiveness.
+                    </p>
+                </div>
+
+                <div class="content-card">
+                    <h2 class="content-title">🏗️ Levolution 2.0: Environmental Warfare</h2>
+                    <p class="content-text">
+                        The signature Battlefield destruction system has evolved into Levolution 2.0, where every building, bridge, and structure can be dynamically 
+                        destroyed and even rebuilt during matches. This isn't just about bringing down walls - entire city blocks can be reshaped through coordinated 
+                        demolition, creating new sight lines, defensive positions, and tactical opportunities that emerge organically from player actions rather than 
+                        scripted events.
+                    </p>
+                    <p class="content-text">
+                        The new construction system allows engineering specialists to rebuild destroyed structures using salvaged materials, creating temporary bridges, 
+                        fortifications, and defensive positions. This adds a strategic layer where teams must balance destruction and construction to maintain tactical 
+                        advantages. Destroyed buildings leave realistic debris fields that provide cover and concealment, while also creating obstacles that affect 
+                        vehicle movement and infantry positioning.
+                    </p>
+                    <p class="content-text">
+                        Environmental hazards play a crucial role in the destruction system. Gas pipelines can be ruptured to create area denial zones, electrical 
+                        systems can be sabotaged to disable building defenses, and structural weak points can be targeted for maximum demolition efficiency. The 
+                        destruction is persistent throughout matches, meaning early-game demolition affects late-game tactics, encouraging long-term strategic thinking 
+                        rather than just immediate tactical gains.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🚁</div>
+                        <h3 class="feature-title">Next-Gen Vehicles</h3>
+                        <p class="feature-description">
+                            Over 50 land, air, and sea vehicles with realistic physics and damage models. 
+                            New vehicle classes include hover tanks and advanced fighter jets.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">🏗️</div>
+                        <h3 class="feature-title">Levolution 2.0</h3>
+                        <p class="feature-description">
+                            Enhanced destruction system where every building, bridge, and structure can be 
+                            dynamically destroyed and rebuilt during matches.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">🎮</div>
+                        <h3 class="feature-title">Cross-Platform Play</h3>
+                        <p class="feature-description">
+                            Full cross-platform support across PlayStation 5, Xbox Series X|S, and PC, 
+                            with cross-progression and shared friend lists.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">🌍</div>
+                        <h3 class="feature-title">Global Battlefields</h3>
+                        <p class="feature-description">
+                            Fight across 12 massive maps spanning different continents and climates, 
+                            each with unique environmental challenges and strategic opportunities.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h2 class="content-title">🏆 Specialist System</h2>
+                    <p class="content-text">
+                        The new Specialist system replaces traditional classes with unique characters, each bringing special abilities and equipment. 
+                        From Webster's grappling hook for vertical mobility to Falck's combat surgeon abilities, each Specialist offers distinct 
+                        tactical advantages that encourage diverse team compositions and strategies.
+                    </p>
+                    <p class="content-text">
+                        Players can still customize their loadouts extensively, but now with the added layer of Specialist abilities that can turn 
+                        the tide of battle. The system encourages experimentation and rewards players who master multiple Specialists to adapt 
+                        to different combat situations and team needs.
+                    </p>
+                </div>
+
+                <div class="content-card">
+                    <h2 class="content-title">🎯 Exclusive PlayStation Features</h2>
+                    <p class="content-text">
+                        PlayStation 5 players get exclusive access to advanced DualSense controller integration, where every weapon has unique 
+                        haptic feedback patterns. Feel the difference between firing an assault rifle and a sniper rifle through precise controller 
+                        vibrations. The adaptive triggers provide realistic resistance for different weapon types and vehicle controls.
+                    </p>
+                    <p class="content-text">
+                        3D Audio support creates an immersive battlefield where players can precisely locate enemies, vehicles, and environmental 
+                        hazards through spatial sound. Combined with the console's SSD technology, map loading is nearly instantaneous, 
+                        keeping players in the action without interruption.
+                    </p>
+                </div>
+
+                <div class="content-card" style="text-align: center; background: linear-gradient(45deg, rgba(255, 107, 53, 0.2), rgba(255, 140, 66, 0.1));">
+                    <h2 class="content-title">🏆 Action Gaming Master</h2>
+                    <p class="content-text">
+                        You've successfully demonstrated your expertise in action gaming and unlocked this exclusive Battlefield 6 intelligence report. 
+                        This comprehensive overview represents insider knowledge about one of the most anticipated action games, compiled exclusively 
+                        for dedicated PlayStation gamers who prove their action gaming knowledge.
+                    </p>
+                    <p class="content-text">
+                        Your mastery of action gaming mechanics, combat systems, and battlefield tactics has earned you access to this classified 
+                        information about the future of large-scale multiplayer warfare gaming.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="clean-nav.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Slideshow functionality
+        let currentSlideIndex = 0;
+        let slides = [];
+        let slideInterval;
+        
+        function initSlideshow() {
+            // Wait a bit for DOM to be fully ready
+            setTimeout(() => {
+                // Initialize slides after DOM is loaded
+                slides = document.querySelectorAll('.slide');
+                console.log('Slideshow initialized with', slides.length, 'slides');
+                
+                if (slides.length > 0) {
+                    // Ensure first slide is active
+                    showSlide(0);
+                    
+                    // Start auto-play
+                    startSlideshow();
+                    
+                    // Pause on hover
+                    const slideshowContainer = document.querySelector('.slideshow-container');
+                    if (slideshowContainer) {
+                        slideshowContainer.addEventListener('mouseenter', stopSlideshow);
+                        slideshowContainer.addEventListener('mouseleave', startSlideshow);
+                    }
+                } else {
+                    console.error('No slides found!');
+                }
+            }, 500);
+        }
+        
+        function showSlide(index) {
+            // Ensure slides are initialized
+            if (!slides || slides.length === 0) {
+                slides = document.querySelectorAll('.slide');
+                console.log('Re-initializing slides:', slides.length);
+            }
+            
+            if (slides.length === 0) {
+                console.error('No slides available');
+                return;
+            }
+            
+            // Hide all slides
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                console.log('Hiding slide', i);
+            });
+            
+            // Show current slide
+            if (slides[index]) {
+                slides[index].classList.add('active');
+                currentSlideIndex = index;
+                console.log('Showing slide', index);
+            } else {
+                console.error('Slide index', index, 'not found');
+            }
+        }
+        
+        function changeSlide(direction) {
+            console.log('Changing slide by', direction);
+            
+            // Ensure slides are initialized
+            if (!slides || slides.length === 0) {
+                slides = document.querySelectorAll('.slide');
+            }
+            
+            if (slides.length === 0) {
+                console.error('No slides available for navigation');
+                return;
+            }
+            
+            let newIndex = currentSlideIndex + direction;
+            
+            if (newIndex >= slides.length) {
+                newIndex = 0;
+            } else if (newIndex < 0) {
+                newIndex = slides.length - 1;
+            }
+            
+            // Add Battlefield transition effect
+            addSlideTransitionEffect();
+            
+            showSlide(newIndex);
+        }
+        
+        function addSlideTransitionEffect() {
+            // Create a brief orange flash effect
+            const flash = document.createElement('div');
+            flash.style.position = 'fixed';
+            flash.style.top = '0';
+            flash.style.left = '0';
+            flash.style.width = '100%';
+            flash.style.height = '100%';
+            flash.style.background = 'linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(255, 140, 66, 0.1))';
+            flash.style.pointerEvents = 'none';
+            flash.style.zIndex = '9998';
+            flash.style.opacity = '0';
+            flash.style.transition = 'opacity 0.2s ease';
+            
+            document.body.appendChild(flash);
+            
+            // Flash effect
+            setTimeout(() => {
+                flash.style.opacity = '1';
+            }, 10);
+            
+            setTimeout(() => {
+                flash.style.opacity = '0';
+            }, 100);
+            
+            setTimeout(() => {
+                if (flash.parentNode) {
+                    flash.parentNode.removeChild(flash);
+                }
+            }, 300);
+        }
+        
+        function currentSlide(index) {
+            showSlide(index - 1);
+        }
+        
+        function nextSlide() {
+            changeSlide(1);
+        }
+        
+        function startSlideshow() {
+            stopSlideshow(); // Clear any existing interval
+            slideInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+            console.log('Slideshow started');
+        }
+        
+        function stopSlideshow() {
+            if (slideInterval) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+                console.log('Slideshow stopped');
+            }
+        }
+        
+        // Global functions for onclick handlers
+        window.changeSlide = changeSlide;
+        window.currentSlide = currentSlide;
+        
+        // Initialize slideshow when page loads
+        document.addEventListener('DOMContentLoaded', initSlideshow);
+    </script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Gaming Test - GTA VI</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.svg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="clean-nav.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 2px solid rgba(255, 204, 2, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .quiz-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            color: #ffcc02;
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-progress {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            height: 10px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .quiz-progress-bar {
+            background: linear-gradient(45deg, #ffcc02, #ffd700);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-container {
+            margin-bottom: 2rem;
+        }
+        
+        .question-number {
+            color: #ffcc02;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .answers-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .answer-option {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+        
+        .answer-option:hover {
+            border-color: #ffcc02;
+            background: rgba(255, 204, 2, 0.1);
+            transform: translateX(10px);
+        }
+        
+        .answer-option.selected {
+            border-color: #ffcc02;
+            background: rgba(255, 204, 2, 0.2);
+            box-shadow: 0 0 20px rgba(255, 204, 2, 0.3);
+        }
+        
+        .quiz-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .quiz-btn {
+            background: linear-gradient(45deg, #ffcc02, #ffd700);
+            color: black;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .quiz-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 204, 2, 0.4);
+        }
+        
+        .quiz-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .quiz-results {
+            text-align: center;
+            display: none;
+        }
+        
+        .results-score {
+            font-size: 3rem;
+            color: #ffcc02;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .results-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .results-unlock {
+            background: linear-gradient(45deg, #ffcc02, #ffd700);
+            color: black;
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 1rem;
+        }
+        
+        .results-unlock:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 204, 2, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .quiz-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .quiz-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo clickable-logo">
+                <div class="ps-logo-container">
+                    <span class="ps-logo typing">PlayStation</span>
+                    <div class="ps-symbols">
+                        <div class="ps-symbol triangle">▲</div>
+                        <div class="ps-symbol square">■</div>
+                        <div class="ps-symbol circle">●</div>
+                        <div class="ps-symbol x">✕</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu nav-hidden">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="games.html" class="nav-link">Games</a></li>
+                <li><a href="exclusives.html" class="nav-link">Exclusives</a></li>
+                <li><a href="community.html" class="nav-link">Community</a></li>
+                <li><a href="test-categories.html" class="nav-link">Test</a></li>
+            </ul>
+        </div>
+        <div class="nav-overlay"></div>
+    </nav>
+
+    <main style="margin-top: 120px;">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h1 class="quiz-title">Story Gaming Test</h1>
+                <p class="quiz-subtitle">Grand Theft Auto VI & Narrative Games Knowledge</p>
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <div id="quizContent">
+                <div class="question-container">
+                    <div class="question-number" id="questionNumber">Question 1 of 10</div>
+                    <div class="question-text" id="questionText"></div>
+                    <div class="answers-grid" id="answersGrid"></div>
+                </div>
+
+                <div class="quiz-buttons">
+                    <button class="quiz-btn" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
+                    <button class="quiz-btn" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+                </div>
+            </div>
+
+            <div class="quiz-results" id="quizResults">
+                <div class="results-score" id="finalScore"></div>
+                <div class="results-message" id="resultsMessage"></div>
+                <button class="results-unlock" id="unlockBtn" onclick="unlockContent()" style="display: none;">
+                    🔓 Access GTA VI Exclusive Content
+                </button>
+                <button class="quiz-btn" onclick="restartQuiz()">Retake Test</button>
+                <button class="quiz-btn" onclick="goToCategories()">Back to Categories</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="clean-nav.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const questions = [
+            {
+                question: "What are the names of the two main protagonists in GTA VI?",
+                answers: ["Jason and Lucia", "Tommy and Maria", "Michael and Trevor", "Niko and Roman"],
+                correct: 0
+            },
+            {
+                question: "In which fictional state does GTA VI take place?",
+                answers: ["San Andreas", "Liberty State", "Leonida", "Vice State"],
+                correct: 2
+            },
+            {
+                question: "What is significant about Lucia in GTA VI?",
+                answers: ["She's the youngest protagonist", "She's the first female protagonist", "She's from another country", "She's a police officer"],
+                correct: 1
+            },
+            {
+                question: "Which city is the main setting for GTA VI?",
+                answers: ["Los Santos", "Liberty City", "Vice City", "San Fierro"],
+                correct: 2
+            },
+            {
+                question: "What type of relationship do Jason and Lucia have?",
+                answers: ["Siblings", "Criminal partners", "Married couple", "Rivals"],
+                correct: 1
+            },
+            {
+                question: "When is GTA VI expected to be released?",
+                answers: ["2024", "2025", "2026", "2027"],
+                correct: 2
+            },
+            {
+                question: "What inspired the setting of Vice City in GTA VI?",
+                answers: ["Las Vegas", "Miami", "New York", "Los Angeles"],
+                correct: 1
+            },
+            {
+                question: "Which feature is new to the GTA series in GTA VI?",
+                answers: ["Multiple protagonists", "Dual protagonist system", "Open world", "Vehicle customization"],
+                correct: 1
+            },
+            {
+                question: "What decade aesthetic influences Vice City's design?",
+                answers: ["1970s", "1980s", "1990s", "2000s"],
+                correct: 1
+            },
+            {
+                question: "Which platforms will GTA VI be available on at launch?",
+                answers: ["All platforms", "PC only", "PlayStation 5 and Xbox Series X|S", "Mobile devices"],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let selectedAnswers = [];
+        let score = 0;
+
+        function initQuiz() {
+            showQuestion();
+            updateProgress();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const answersGrid = document.getElementById('answersGrid');
+            answersGrid.innerHTML = '';
+            
+            question.answers.forEach((answer, index) => {
+                const answerDiv = document.createElement('div');
+                answerDiv.className = 'answer-option';
+                answerDiv.textContent = answer;
+                answerDiv.onclick = () => selectAnswer(index);
+                
+                if (selectedAnswers[currentQuestion] === index) {
+                    answerDiv.classList.add('selected');
+                }
+                
+                answersGrid.appendChild(answerDiv);
+            });
+            
+            updateButtons();
+        }
+
+        function selectAnswer(answerIndex) {
+            selectedAnswers[currentQuestion] = answerIndex;
+            
+            // Update visual selection
+            document.querySelectorAll('.answer-option').forEach((option, index) => {
+                option.classList.toggle('selected', index === answerIndex);
+            });
+            
+            updateButtons();
+        }
+
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').disabled = selectedAnswers[currentQuestion] === undefined;
+            
+            if (currentQuestion === questions.length - 1) {
+                document.getElementById('nextBtn').textContent = 'Finish Test';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next';
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+                updateProgress();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+                updateProgress();
+            }
+        }
+
+        function finishQuiz() {
+            // Calculate score
+            score = 0;
+            selectedAnswers.forEach((answer, index) => {
+                if (answer === questions[index].correct) {
+                    score++;
+                }
+            });
+            
+            // Show results
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('quizResults').style.display = 'block';
+            
+            document.getElementById('finalScore').textContent = `${score}/${questions.length}`;
+            
+            let message = '';
+            if (score >= 5) {
+                message = `🎉 Congratulations! You've passed the Story Gaming Test with ${score} out of ${questions.length} correct answers. You've unlocked exclusive GTA VI content!`;
+                document.getElementById('unlockBtn').style.display = 'inline-block';
+            } else {
+                message = `You scored ${score} out of ${questions.length}. You need at least 5 correct answers to unlock exclusive content. Try again to improve your score!`;
+            }
+            
+            document.getElementById('resultsMessage').textContent = message;
+        }
+
+        function unlockContent() {
+            window.location.href = 'gta-vi-secret.html';
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            selectedAnswers = [];
+            score = 0;
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('quizResults').style.display = 'none';
+            initQuiz();
+        }
+
+        function goToCategories() {
+            window.location.href = 'test-categories.html';
+        }
+
+        // Initialize quiz when page loads
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>
